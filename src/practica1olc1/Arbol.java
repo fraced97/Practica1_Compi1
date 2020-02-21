@@ -165,7 +165,7 @@ public class Arbol {
         
         try{
             Thread.sleep(1000);
-            escribir = new PrintWriter(punto.getAbsolutePath()+"//"+"Arbol.dot","UTF-8");
+            escribir = new PrintWriter(punto.getAbsolutePath()+"//Arboles"+"//"+"Arbol.dot","UTF-8");
             //escribir.println("Arbol.dot", "w")
             escribir.println("digraph G {\n");
             Thread.sleep(1000);
@@ -181,8 +181,8 @@ public class Arbol {
             numero = (int) (Math.random() * 1000000000) + 1;
             ProcessBuilder abrir;
             Thread.sleep(1000);
-            String rutaImagen=punto.getAbsolutePath()+"//"+"ArbolAvlImagen"+String.valueOf(numero)+".jpg";
-            String rutaDot= punto.getAbsolutePath()+"//"+"ArbolAvl.dot";
+            String rutaImagen=punto.getAbsolutePath()+"//Arboles"+"//"+"ArbolAvlImagen"+String.valueOf(numero)+".jpg";
+            String rutaDot= punto.getAbsolutePath()+"//Arboles"+"//"+"Arbol.dot";
             abrir = new ProcessBuilder("dot", "-Tjpg", "-o",rutaImagen,rutaDot);
             Thread.sleep(1000);
             //abrir = new ProcessBuilder("dot -Tjpg Arbol.dot -o imagenArbol.jpg");
