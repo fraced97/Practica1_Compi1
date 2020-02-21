@@ -165,7 +165,7 @@ public class Arbol {
         
         try{
             Thread.sleep(1000);
-            escribir = new PrintWriter(punto.getAbsolutePath()+"//"+"ArbolAvl.dot","UTF-8");
+            escribir = new PrintWriter(punto.getAbsolutePath()+"//"+"Arbol.dot","UTF-8");
             //escribir.println("Arbol.dot", "w")
             escribir.println("digraph G {\n");
             Thread.sleep(1000);

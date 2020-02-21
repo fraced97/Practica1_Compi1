@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * @author USUARIO
  */
 public class AnalizadoLexico {
-    public static LinkedList<Token> listaTokens = new LinkedList<>();
+    public  LinkedList<Token> listaTokens = new LinkedList<>();
     public static LinkedList<ErroresLexicos> listaErrores = new LinkedList<>();
     public LinkedList<TokenER> listaTokensER = new LinkedList<>();
     public void Analizar(String x){
