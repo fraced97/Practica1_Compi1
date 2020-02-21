@@ -90,6 +90,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         txtSalida = new java.awt.TextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         abrirArchivo = new javax.swing.JMenuItem();
@@ -131,6 +134,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(620, 30, 200, 430);
+
+        jButton1.setText("Arbol");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(840, 40, 57, 23);
+
+        jButton3.setText("jButton3");
+        jPanel1.add(jButton3);
+        jButton3.setBounds(840, 100, 73, 23);
+
+        jButton4.setText("jButton4");
+        jPanel1.add(jButton4);
+        jButton4.setBounds(840, 160, 73, 23);
 
         jMenu1.setText("Archivo");
 
@@ -439,7 +454,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem generarXML;
     private javax.swing.JMenuItem guardarArchivo;
     private javax.swing.JMenuItem guardarComo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
