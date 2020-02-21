@@ -133,7 +133,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(620, 30, 200, 430);
+        jScrollPane1.setBounds(580, 30, 200, 430);
 
         jButton1.setText("Arbol");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,15 +142,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(840, 40, 57, 23);
+        jButton1.setBounds(790, 40, 130, 30);
 
-        jButton3.setText("jButton3");
+        jButton3.setText("T. Transiciones");
         jPanel1.add(jButton3);
-        jButton3.setBounds(840, 100, 73, 23);
+        jButton3.setBounds(790, 100, 130, 23);
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Automata");
         jPanel1.add(jButton4);
-        jButton4.setBounds(840, 160, 73, 23);
+        jButton4.setBounds(790, 160, 130, 23);
 
         jMenu1.setText("Archivo");
 
@@ -439,6 +439,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
   
                         return this;
    }
+    }
+    
+    public void ListaTokens(){
+        
     }
     /**
      * @param args the command line arguments

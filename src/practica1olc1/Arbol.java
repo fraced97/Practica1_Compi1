@@ -8,6 +8,7 @@ package practica1olc1;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -23,6 +24,11 @@ public class Arbol {
         TokenER tipoToken;
         int contador;
         Nodo hojaIzquierda, hojaDerecha;
+        ArrayList<Integer> primeros;
+        ArrayList<Integer> ultimos;
+        LinkedList<Integer>primeros2;
+        boolean anulable;
+        LinkedList<Integer>ultimos2;
 
         public Nodo(int contador, TokenER tipoToken) {
             //this.nombreArchivo = u;
@@ -30,7 +36,10 @@ public class Arbol {
             this.tipoToken = tipoToken;
             this.hojaDerecha = null;
             this.hojaIzquierda = null;
-
+            primeros= new ArrayList<>();
+            ultimos= new ArrayList<>();
+            primeros2 = new LinkedList();
+            ultimos2 = new LinkedList();
         }
     }
     Nodo auxiliar = null;

@@ -6,6 +6,7 @@
 package practica1olc1;
 
 import java.util.LinkedList;
+import static practica1olc1.VentanaPrincipal.listaJlist;
 
 /**
  *
@@ -74,6 +75,12 @@ public class AnalizadoLexico {
                         
                     }else if(variable == ' ' || variable == '\t'){
                         estadoActual=0;
+                    }else{
+                        lexema=lexema+variable;
+                        estadoActual=0;
+                        listaErrores.add(new ErroresLexicos(lexema,"Lexico","Elemento desconocido",fila,columna));
+                        lexema="";
+                                
                     }
                     break;
                 /*case 1:
@@ -448,6 +455,7 @@ public class AnalizadoLexico {
         listaTokens.clear();
         listaErrores.clear();
         listaTokensER.clear();
+        listaJlist.clear();
         System.out.println("ESTA LIMPIO");
     }
     public boolean buscarPR(String lexema, int fila, int columna){
