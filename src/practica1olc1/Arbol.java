@@ -9,8 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -41,6 +44,15 @@ public class Arbol {
             primeros2 = new LinkedList();
             ultimos2 = new LinkedList();
         }
+        
+        public void verificarDuplicado(){
+            Set<Integer> name = new HashSet<>(this.primeros2);
+          Set<Integer> name2 = new HashSet<>(this.ultimos2);
+           this.primeros2.clear();
+                this.primeros2.addAll(name);
+            this.ultimos2.clear();
+                this.ultimos2.addAll(name2);
+        }
     }
     Nodo auxiliar = null;
     public Nodo raiz = null;
@@ -54,9 +66,16 @@ public class Arbol {
     int contadorId=0;
     int contadorCadena=0;
     LinkedList<TokenER> lista;
+    LinkedList<Nodo> listaNodo;
+    LinkedList<LinkedList<Integer>> listaHijos=new LinkedList();
 
     public Boolean esta_vacio() {
         return raiz == null;
+    }
+    public void siguientesOrdenar(){
+        for(LinkedList<Integer> x: listaHijos){
+            Collections.sort(x); 
+        }
     }
 
     public Arbol(LinkedList<TokenER> lista) throws IOException, InterruptedException {
@@ -83,12 +102,33 @@ public class Arbol {
                 indice++;
                    Nodo and_izquierda = ordenarNodos();
                  and_nodo.hojaIzquierda = and_izquierda;
+                 and_nodo.anulable=true;
+                 and_nodo.primeros2.addAll(and_izquierda.primeros2);
+                 and_nodo.ultimos2.addAll(and_izquierda.ultimos2);
+                 for(int aux:and_izquierda.primeros2){
+                     for (int aux2 : and_izquierda.ultimos2) {
+                         listaHijos.get(aux).add(aux2);
+                     }
+                 }
+                        siguientesOrdenar();
                      return and_nodo;
             case MAS:
                   Nodo masNodo = new Nodo(indice, lista.get(indice));
                  indice++;
                           Nodo masIzquierda = ordenarNodos();
                    masNodo.hojaIzquierda = masIzquierda;
+                   if(masIzquierda.anulable){
+                       masNodo.anulable=true;
+                   }else{
+                       masNodo.anulable=false;
+                   }
+                   for (int aux : masIzquierda.ultimos2) {
+                       for (int aux2 : masIzquierda.primeros2) {
+                           listaHijos.get(aux).add(aux2);
+                       }
+                    
+                }
+                   siguientesOrdenar();
                      return masNodo;
             case PUNTO:
                          Nodo puntoNodo = new Nodo(indice, lista.get(indice));
@@ -97,6 +137,32 @@ public class Arbol {
                    Nodo puntoDerecha = ordenarNodos();
                  puntoNodo.hojaIzquierda = puntoIzquierda;
                      puntoNodo.hojaDerecha = puntoDerecha;
+                     if(puntoIzquierda.anulable && puntoDerecha.anulable){
+                         puntoNodo.anulable=true;
+                         
+                         
+                     }else{
+                         puntoNodo.anulable=false;
+                     }
+                     if(puntoIzquierda.anulable){
+                         puntoNodo.primeros2.addAll(puntoIzquierda.primeros2);
+                         puntoNodo.primeros2.addAll(puntoDerecha.primeros2);
+                     }else{
+                         puntoNodo.primeros2.addAll(puntoIzquierda.primeros2);
+                     }
+                     if(puntoIzquierda.anulable){
+                         puntoNodo.ultimos2.addAll(puntoIzquierda.ultimos2);
+                         puntoNodo.ultimos2.addAll(puntoDerecha.ultimos2);
+                     }else{
+                         puntoNodo.ultimos2.addAll(puntoDerecha.ultimos2);
+                     }
+                      for (int aux : puntoIzquierda.ultimos2) {
+                       for (int aux2 : puntoDerecha.primeros2) {
+                           listaHijos.get(aux).add(aux2);
+                       }
+                    
+                }
+                      puntoNodo.verificarDuplicado();
                    return puntoNodo;
             case INTERROGACION:
                  System.out.println("ENTRO EN INTERROGACION");
