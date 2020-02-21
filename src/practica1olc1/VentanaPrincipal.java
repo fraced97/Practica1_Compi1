@@ -136,6 +136,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setBounds(620, 30, 200, 430);
 
         jButton1.setText("Arbol");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(840, 40, 57, 23);
 
@@ -303,6 +308,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_botonAnalizarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        seleccionar.setFileFilter(new FileNameExtensionFilter("todos los archivos *.jpg", "jpg", "JPG"));
+                int abrir = seleccionar.showDialog(null, "Abrir");
+                if (abrir == JFileChooser.APPROVE_OPTION) {
+                    String PATH = seleccionar.getSelectedFile().getAbsolutePath();
+                    if (PATH.endsWith(".jpg") || PATH.endsWith(".JPG")) {
+                        //archivo = seleccionar.getSelectedFile();
+                        try {
+                            VentanaImagen ventana = new VentanaImagen(PATH);
+                            
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        System.out.println("No es .jpg");
+                    }
+                }
+               
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     public void Carpetas(){

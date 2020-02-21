@@ -8,6 +8,8 @@ package practica1olc1;
 import java.awt.Frame;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
@@ -15,7 +17,7 @@ import javax.swing.JScrollPane;
  *
  * @author USUARIO
  */
-public class VentanaImagen extends Frame{
+public class VentanaImagen extends JFrame{
     JLabel imagen;
     JScrollPane scroll;
     public VentanaImagen(String ruta) throws InterruptedException{
@@ -29,8 +31,8 @@ public class VentanaImagen extends Frame{
         scroll.setViewportView(imagen);
         add(scroll);
         setVisible(true);
-        File archivo1 = new File(ruta);
-        archivo1.delete();
+        //File archivo1 = new File(ruta);
+        //archivo1.delete();
         
     }
 }
