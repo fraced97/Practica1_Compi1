@@ -144,11 +144,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(790, 40, 130, 30);
 
-        jButton3.setText("T. Transiciones");
+        jButton3.setText("T. Siguientes");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(790, 100, 130, 23);
 
-        jButton4.setText("Automata");
+        jButton4.setText("T. Transiciones");
         jPanel1.add(jButton4);
         jButton4.setBounds(790, 160, 130, 23);
 
@@ -335,6 +340,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
                
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        seleccionar.setFileFilter(new FileNameExtensionFilter("todos los archivos *.jpg", "jpg", "JPG"));
+                int abrir = seleccionar.showDialog(null, "Abrir");
+                if (abrir == JFileChooser.APPROVE_OPTION) {
+                    String PATH = seleccionar.getSelectedFile().getAbsolutePath();
+                    if (PATH.endsWith(".jpg") || PATH.endsWith(".JPG")) {
+                        //archivo = seleccionar.getSelectedFile();
+                        try {
+                            VentanaImagen ventana = new VentanaImagen(PATH);
+                            
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        System.out.println("No es .jpg");
+                    }
+                }
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     
     public void Carpetas(){
