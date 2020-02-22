@@ -87,7 +87,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonAnalizar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtSalida = new java.awt.TextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
@@ -127,8 +126,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Salida");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 330, 50, 14);
-        jPanel1.add(txtSalida);
-        txtSalida.setBounds(30, 350, 540, 120);
 
         jScrollPane1.setViewportView(jList1);
 
@@ -319,6 +316,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonAnalizarActionPerformed
 
+    public  void obtenerEjemploLexema(int x,int cantidad){
+        /*if((x%2)==0){
+            
+            txtSalida.setText("El ejemplo de la ExpresionR. "+String.valueOf(cantidad)+" es correcta");
+        }else{
+            txtSalida.setText("El ejemplo de la ExpresionR "+String.valueOf(cantidad)+" es incorrecta");
+        }*/
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         seleccionar.setFileFilter(new FileNameExtensionFilter("todos los archivos *.jpg", "jpg", "JPG"));
@@ -505,7 +510,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+               // new VentanaPrincipal().setVisible(true);
             }
         });
     }
@@ -528,7 +533,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.TextArea txtSalida;
     private java.awt.TextArea txt_Entrada;
     // End of variables declaration//GEN-END:variables
 }

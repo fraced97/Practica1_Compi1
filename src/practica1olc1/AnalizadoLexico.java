@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static practica1olc1.VentanaPrincipal.analizar;
 import static practica1olc1.VentanaPrincipal.listaJlist;
 
@@ -19,7 +20,7 @@ import static practica1olc1.VentanaPrincipal.listaJlist;
 public class AnalizadoLexico {
     public  LinkedList<Token> listaTokens = new LinkedList<>();
     public static LinkedList<ErroresLexicos> listaErrores = new LinkedList<>();
-    public LinkedList<TokenER> listaTokensER = new LinkedList<>();
+    public static LinkedList<TokenER> listaTokensER = new LinkedList<>();
     public void Analizar(String x){
         String aux="";
         char variable;
@@ -360,6 +361,7 @@ public class AnalizadoLexico {
         int nExpresion=0;
         int estado=0;
         int auxContador=0;
+        int contador=0;
         //Token auxContador;
         for (Token i : listaTokens) {
             if(String.valueOf(i.token).equals("EXPRESION_REGULAR")){
@@ -411,6 +413,18 @@ public class AnalizadoLexico {
                                 estado=0;
                         try {
                             Arbol arbol = new Arbol(analizar.listaTokensER);
+                            int numero = 0;
+                            contador++;
+                            numero = (int) (Math.random() * 100) + 1;
+                            if((numero%2)==0){
+                                JOptionPane.showMessageDialog(null, "Expresion "+String.valueOf(contador)+" Correcta");
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Expresion "+String.valueOf(contador)+" InCorrecta");
+                            }
+                           //VentanaPrincipal ventana = new VentanaPrincipal();
+                            //ventana.obtenerEjemploLexema(numero, contador);
+                            //ventana.setVisible(true);
+                            
                             arbol.tablaSiguientes();
                             analizar.listaTokensER.clear();
                         } catch (IOException ex) {

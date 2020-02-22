@@ -68,21 +68,21 @@ public class Arbol {
             this.ultimos2.addAll(name2);
         }
     }
-    Nodo auxiliar ;
-    public Nodo raiz = null;
-    int indice = 0;
+              Nodo auxiliar ;
+                public Nodo raiz = null;
+            int indice = 0;
     int index2 = 0;
-    int hojasArbolContador = -1;
-    int contadorAsterisco = 0;
-    int contadorSuma = 0;
-    int contadorInterrog = 0;
-    int contadorOr = 0;
+            int hojasArbolContador = -1;
+  int contadorAsterisco = 0;
+      int contadorSuma = 0;
+ int contadorInterrog = 0;
+           int contadorOr = 0;
     int contadorId = 0;
     int contadorCadena = 0;
-    LinkedList<TokenER> copiaLista;
-    LinkedList<Nodo> listaDeNodos = new LinkedList();
-    LinkedList<LinkedList<Integer>> hojasArbol = new LinkedList();
-    //LinkedList<Follows> follows = new LinkedList();
+  LinkedList<TokenER> copiaLista;
+            LinkedList<Nodo> listaDeNodos = new LinkedList();
+               // LinkedList<LinkedList<Integer>> hojasArbol = new LinkedList();
+    LinkedList<Follows> follows = new LinkedList();
     
     public Boolean esta_vacio() {
         return raiz == null;
@@ -90,15 +90,15 @@ public class Arbol {
 
     public void siguientesOrdenar( ) {
         /*for (int i = 0; i <ht.size(); i++) {
-            for (int j = 0; j < s.size(); j++) {
-                if(!listNode.get(ht.get(i)).siguientes.contains(s.get(j))){
-                    listNode.get(ht.get(i)).siguientes.add(s.get(j));
-                }
-            }
+        for (int j = 0; j < s.size(); j++) {
+        if(!listNode.get(ht.get(i)).siguientes.contains(s.get(j))){
+        listNode.get(ht.get(i)).siguientes.add(s.get(j));
+        }
+        }
         }*/
-                        for(LinkedList<Integer> x: hojasArbol){
-         Collections.sort(x); 
-                }
+        follows.forEach((x) -> {
+            Collections.sort(x.getSiguientes());
+        });
     }
 
     public Arbol(LinkedList<TokenER> lista) throws IOException, InterruptedException {
@@ -117,6 +117,7 @@ public class Arbol {
     Nodo ArbolySiguientes(){                
         switch(copiaLista.get(indice).tipo){
             case CADENA:
+                //System.out.println("entro");
                     Nodo Cadena_Nodo = new Nodo(indice,copiaLista.get(indice));
                 Cadena_Nodo.anulable=(false);
                      indice++;
@@ -124,7 +125,8 @@ public class Arbol {
              Cadena_Nodo.numeracion=(hojasArbolContador);
                     Cadena_Nodo.setPrimeros2(Cadena_Nodo.numeracion);
                         Cadena_Nodo.setUltimos2(Cadena_Nodo.numeracion);
-                hojasArbol.add(new LinkedList<Integer>()); //*
+                        recibirNodo(Cadena_Nodo);
+                
                         Cadena_Nodo.verificarDuplicado();
             listaDeNodos.add(Cadena_Nodo);
                         return Cadena_Nodo;
@@ -132,6 +134,7 @@ public class Arbol {
                
                
           Nodo nodoAsterisco = new Nodo(indice,copiaLista.get(indice));
+                    //System.out.println("kkkkk");
                 indice++;
                         Nodo izqPor = ArbolySiguientes();
            nodoAsterisco.hojaIzquierda=izqPor;
@@ -140,7 +143,7 @@ public class Arbol {
              nodoAsterisco.ultimos2.addAll(izqPor.ultimos2);
                        for (int aux: izqPor.ultimos2) {
                             for (int aux2: izqPor.primeros2) {
-               hojasArbol.get(aux).add(aux2);
+               follows.get(aux).getSiguientes().add(aux2);
                 }
                 }
                 
@@ -156,7 +159,7 @@ public class Arbol {
                                         IdentificadorNodo.setUltimos2(IdentificadorNodo.numeracion);
               indice++;
                       IdentificadorNodo.verificarDuplicado();
-                                   hojasArbol.add(new LinkedList<Integer>()); //*
+                                  recibirNodo(IdentificadorNodo);
                     listaDeNodos.add(IdentificadorNodo);
             return IdentificadorNodo;    
             
@@ -166,9 +169,11 @@ public class Arbol {
                          indice++;
                      Nodo puntoIzquierda = ArbolySiguientes();
                             Nodo puntoDerecha = ArbolySiguientes();
+                            //System.out.println("00000");
                   puntoNodo.hojaIzquierda=puntoIzquierda;
                          puntoNodo.hojaDerecha=puntoDerecha;
             if (puntoIzquierda.anulable && puntoDerecha.anulable) {
+                ///System.out.println("////////");
                     puntoNodo.anulable=(true);
                          }else{
                puntoNodo.anulable=(false);
@@ -188,13 +193,15 @@ public class Arbol {
                                 for (int aux: puntoIzquierda.ultimos2) {
               for (int aux2: puntoDerecha.primeros2) {
                                    //follows.get(x).getSiguientes().add(y);
-             hojasArbol.get(aux).add(aux2);
+             follows.get(aux).getSiguientes().add(aux2);
                                        }
+                                    //System.out.println("*****");
          }
                                 puntoNodo.verificarDuplicado();
                                     return puntoNodo;
             case NUMERAL:
                                 Nodo nodoHashtag = new Nodo(indice,copiaLista.get(indice));
+                                ///System.out.println("-*-*+-+-+-+");
                          nodoHashtag.anulable=(false);
                 
              indice++;
@@ -202,10 +209,10 @@ public class Arbol {
            nodoHashtag.numeracion=(hojasArbolContador);
                         nodoHashtag.setPrimeros2(nodoHashtag.numeracion);
             nodoHashtag.setUltimos2(nodoHashtag.numeracion);
-                                 hojasArbol.add(new LinkedList<Integer>()); //*
-                //Follows f = new Follows();
-                //f.setNodo(nodoHashtag);
-                //follows.add(f);
+                                 recibirNodo(nodoHashtag);
+                Follows f = new Follows();
+                f.setNodo(nodoHashtag);
+                follows.add(f);
                             nodoHashtag.verificarDuplicado();
                                     listaDeNodos.add(nodoHashtag);
         return nodoHashtag;    
@@ -231,6 +238,7 @@ public class Arbol {
                                        or_Nodo.anulable=(true);
                             }else{
                                  or_Nodo.anulable=(false);
+                                 //System.out.println("==============");
            }
                                          or_Nodo.primeros2.addAll(orIzquierda.primeros2);
                          or_Nodo.primeros2.addAll(orDerecha.primeros2);
@@ -247,6 +255,7 @@ public class Arbol {
             Nodo nodoMasIzquierda = ArbolySiguientes();
                              signoMasNodo.hojaIzquierda=(nodoMasIzquierda);
                                                  if(nodoMasIzquierda.anulable){
+                                                     //System.out.println("323232323");
                     signoMasNodo.anulable=(true);
                          }else{
                     signoMasNodo.anulable=(false);
@@ -255,7 +264,7 @@ public class Arbol {
                          signoMasNodo.ultimos2.addAll(nodoMasIzquierda.ultimos2);
             for (int x: nodoMasIzquierda.ultimos2) {
                                  for (int y: nodoMasIzquierda.primeros2) {
-                hojasArbol.get(x).add(y);
+               follows.get(x).getSiguientes().add(y);
                             }
          }
                                                        siguientesOrdenar();
@@ -287,6 +296,14 @@ public class Arbol {
             graficarArbol2(raiz7.hojaDerecha, escribir);
         }
 
+    }
+    public void recibirNodo(Nodo node){
+        //System.out.println(Numeracion);
+        Follows follow2= new Follows();
+        follow2.setNodo(node);
+        follow2.setSiguientes(new LinkedList<Integer>());
+        follows.add(follow2);
+                
     }
 
     public void inorden(Nodo aux, PrintWriter escribir) {
@@ -369,12 +386,12 @@ public class Arbol {
                     + "            </TR>");
 
             int contadorColumna = -1;
-            for (LinkedList<Integer> u : this.hojasArbol) {
+            for (Follows u: this.follows) {
                 contadorColumna++;
-                if (u != null) {
-                    escribir.println("<TR>");escribir.println("<TD>");escribir.println(listaDeNodos.get(contadorColumna).tipoToken.lexema.replaceAll(">", "&#62;").replaceAll("<", "&#60;"));
+                if (u.getSiguientes() != null) {
+                    escribir.println("<TR>");escribir.println("<TD>");escribir.println(u.getNodo().tipoToken.lexema.replaceAll(">", "&#62;").replaceAll("<", "&#60;"));
            escribir.println("</TD>"); escribir.println("<TD>"); escribir.println(String.valueOf(contadorColumna));
- escribir.println("</TD>");escribir.println("<TD>"); escribir.println(u.toString()); escribir.println("</TD>");escribir.println("</TR>");
+ escribir.println("</TD>");escribir.println("<TD>"); escribir.println(u.getSiguientes().toString()); escribir.println("</TD>");escribir.println("</TR>");
                 }//else{
                 //escribir.println("<TR>");escribir.println("<TD>");escribir.println(String.valueOf(contadorColumna));escribir.println("</TD>");escribir.println("<TD>");escribir.println();
                 //escribir.println("</TD>");escribir.println("<TD>");escribir.println();escribir.println("</TD>");escribir.println("<TD>");escribir.println();escribir.println("</TD>");
