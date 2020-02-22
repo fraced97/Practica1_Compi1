@@ -96,9 +96,9 @@ public class Arbol {
                 }
             }
         }*/
-        for(LinkedList<Integer> x: hojasArbol){
-            Collections.sort(x); 
-        }
+                        for(LinkedList<Integer> x: hojasArbol){
+         Collections.sort(x); 
+                }
     }
 
     public Arbol(LinkedList<TokenER> lista) throws IOException, InterruptedException {
