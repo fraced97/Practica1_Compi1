@@ -294,18 +294,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         analizar.Analizar(txt_Entrada.getText());
-        analizar.AnalizarER();
-        Carpetas();
         try {
+            analizar.AnalizarER();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Carpetas();
+        /*try {
             //Thread.sleep(1000);
-            Arbol arbol = new Arbol(analizar.listaTokensER);
+           // Arbol arbol = new Arbol(analizar.listaTokensER);
             //Thread.sleep(1000);
+            //arbol.tablaSiguientes();
             
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
     }//GEN-LAST:event_botonAnalizarActionPerformed
 

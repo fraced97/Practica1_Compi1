@@ -5,7 +5,11 @@
  */
 package practica1olc1;
 
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static practica1olc1.VentanaPrincipal.analizar;
 import static practica1olc1.VentanaPrincipal.listaJlist;
 
 /**
@@ -32,7 +36,7 @@ public class AnalizadoLexico {
                 case 0:
                     //System.out.println("ENTRO A");
                     if(variable =='{'){
-                        estadoActual=1;
+                        //estadoActual=1;
                         estadoActual=0;
                         lexema= lexema + variable;
                         listaTokens.add(new Token(Token.Tipo.LLAVE_ABIERTA,lexema,"Llave Abierta",fila,columna));
@@ -40,7 +44,7 @@ public class AnalizadoLexico {
                         //lexema= lexema + variable;
                         //listaTokens.add(new Token(Token.Tipo.LLAVE_ABIERTA,lexema,"Llave Abierta",fila,columna));
                     }else if(variable == '}'){
-                        estadoActual=1;
+                        //estadoActual=1;
                         estadoActual=0;
                         lexema = lexema + variable;
                         listaTokens.add(new Token(Token.Tipo.LLAVE_CERRADA,lexema,"Llave Cerrada",fila,columna));
@@ -75,6 +79,12 @@ public class AnalizadoLexico {
                         
                     }else if(variable == ' ' || variable == '\t'){
                         estadoActual=0;
+                    }else if(variable=='#'){
+                        estadoActual=0;
+                        lexema = lexema + variable;
+                        listaTokens.add(new Token(Token.Tipo.NUMERAL,lexema,"Numeral",fila,columna));
+                        lexema ="";
+                    
                     }else{
                         lexema=lexema+variable;
                         estadoActual=0;
@@ -343,7 +353,7 @@ public class AnalizadoLexico {
         
     }
     
-    public void AnalizarER(){
+    public void AnalizarER() throws InterruptedException{
         String lexemaLetra="";
         String lexema="";
         String lexemaAux="";
@@ -355,7 +365,7 @@ public class AnalizadoLexico {
             if(String.valueOf(i.token).equals("EXPRESION_REGULAR")){
                 
                 nExpresion++;
-                lexemaAux=i.lexema;
+                lexemaAux="."+i.lexema+"#";
                 for (int j = 0; j < lexemaAux.length(); j++) {
                     auxContador=j;
                     char c = lexemaAux.charAt(j);
@@ -393,6 +403,19 @@ public class AnalizadoLexico {
                                 estado=0;
                             }else if(c=='"'){
                                 estado=1;
+                            }else if(c=='#'){
+                            
+                                lexema=lexema+c;
+                                listaTokensER.add(new TokenER(TokenER.TipoER.NUMERAL,lexema,"Expresion "+String.valueOf(nExpresion)));
+                                lexema="";
+                                estado=0;
+                        try {
+                            Arbol arbol = new Arbol(analizar.listaTokensER);
+                            arbol.tablaSiguientes();
+                            analizar.listaTokensER.clear();
+                        } catch (IOException ex) {
+                            Logger.getLogger(AnalizadoLexico.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                             }/*else if(c=='a'||c=='A'){
                                 for (int k = auxContador; k < lexemaAux.length(); k++) {
                                     lexemaLetra=lexemaLetra+lexemaAux.charAt(k);

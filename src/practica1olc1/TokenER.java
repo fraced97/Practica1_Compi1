@@ -19,7 +19,8 @@ public class TokenER {
         CADENA,
         SIMBOLO,
         IDENTIFICADOR,
-        PUNTO
+        PUNTO,
+        NUMERAL;
         
         
         

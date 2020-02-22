@@ -28,7 +28,8 @@ public class Token {
         EXPRESION_REGULAR,
         RESERVADA_CONJ,
         EJEMPLO_EXPRESION,
-        IDENTIFICADOR_CONJ;
+        IDENTIFICADOR_CONJ,
+        NUMERAL;
     }
     Tipo token;
     String lexema;
